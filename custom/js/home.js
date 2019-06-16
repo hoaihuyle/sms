@@ -1,17 +1,18 @@
 var manageStudentTable;
 var studentSectionTable = {};
 var base_url = $("#base_url").val();
- 
+console.log(base_url);
+
 $(document).ready(function() {
-	$("#topScheduleNav").addClass('active'); 
+	$("#topTimelineNav").addClass('active'); 
 
 	var request = $("#request").text();
 
 	// Attendance
 	// ============
-	if(request == 'add') {  
+	if(request == 'add') { 
 
-		$("#takeScheduleNav").addClass('active');
+		$("#takeTimelineNav").addClass('active');
 
 
 		// select on the attendance type 
@@ -109,28 +110,7 @@ $(document).ready(function() {
 		
 	} 
 	else if(request == 'report') {
-		$("#scheduleRepott").addClass('active');
-
-		/* 
-		*----------------------------------------------------
-		* select the attendance type
-		*----------------------------------------------------
-		*/
-		$("#className").unbind('change').bind('change', function() {
-			var typeId = $(this).val();
-
-			// if(typeId == 1) {
-				$("#student-form").load(base_url + 'schedule/fetchClassAndSection', function() {
-					$("#className").unbind('change').bind('change', function() {
-						var classId = $(this).val();
-						$("#sectionName").load('schedule/fetchClassSection/'+classId);
-					});
-				});
-			// } 
-			// else {
-			// 	$("#student-form").html('');
-			// }
-		});	
+		$("#timelineReport").addClass('active');
 
 		$("#reportDate").calendarsPicker({			
 			calendar: $.calendars.instance(),		

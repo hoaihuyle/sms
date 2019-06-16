@@ -1,6 +1,63 @@
 
-<br />
-<h1 class="codyhouse"> THỜI KHÓA BIỂU CÁC MÔN HỌC<!-- <a href="https://codyhouse.co/gem/schedule-template/">https://codyhouse.co/gem/schedule-template/</a> --></h1>
+<?php 
+if($this->input->get('atd') == '' || !$this->input->get('atd')) {
+  show_404();
+} else {
+?>
+
+<div id="request" class="div-hide"><?php echo $this->input->get('atd'); ?></div>
+
+<ol class="breadcrumb">
+  <li><a href="<?php echo base_url('home') ?>">Trang chủ</a></li> 
+  <?php   
+  if($this->input->get('atd') == 'add') {
+    echo '<li class="active">Đăng kí lịch học</li>';
+  } 
+  else if ($this->input->get('atd') == 'report') {
+    echo '<li class="active">Xem lịch học</li>';
+  }   
+  ?>  
+</ol>
+<?php   
+	if($this->input->get('atd') == 'add') {
+// echo "Add attendance";
+?>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<p>Đăng kí lịch học cá nhân</p>  	
+	</div>
+	<div class="panel-body">
+		<div id="messages"></div>
+		<form class="form-horizontal" method="post" id="getAttendanceForm">
+			<div class="form-group">
+				<label for="type" class="col-sm-2 control-label">
+				Ngành học</label>
+				<div class="col-sm-10">
+					<select class="form-control" name="type" id="type">
+						<option value="">Lựa chọn</option>
+						<?php  
+						foreach ($classData as $key => $value) {
+						echo "<option value='".$value['class_id']."'>".$value['class_name']."</option>";
+						} // /.foreach for class data
+						?>
+					</select>
+				</div>
+			</div>
+			<div class="result"></div>		  
+		</form>
+
+		<div id="attendance-result"></div>
+	</div>
+<!-- /panle-bdy -->
+</div>
+
+<?php
+} // /add attendance
+else{
+// echo "report";        
+?>   
+<br/>
+<h1 class="codyhouse"> THỜI KHÓA BIỂU CÁC MÔN HỌC</h1>
 <div class="cd-schedule loading">
 	<div class="timeline">
 		<ul>
@@ -219,3 +276,13 @@
 	<div class="cover-layer"></div>
 </div> <!-- .cd-schedule -->
 
+
+<?php 
+	}//report
+	?>
+
+<script type="text/javascript" src="<?php echo base_url('custom/js/home.js') ?>"></script>
+
+<?php
+} // /chcing
+?>

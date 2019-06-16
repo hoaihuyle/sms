@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Schedule Template</title>
+  <title>Trường Đại Học Kinh Tế- Huế HCE</title>
     <!-- bootstrap css -->
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>">
   <!-- boostrap theme -->
@@ -39,7 +39,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php echo base_url('home') ?>">Hệ thống quản lý trường học</a>
+      <a class="navbar-brand" href="<?php echo base_url('home?atd=report') ?>">Hệ thống quản lý trường học</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

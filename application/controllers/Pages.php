@@ -14,7 +14,7 @@ class Pages extends MY_Controller
 
         $data['title'] = ucfirst($page); // Capitalize the first letter
 
-        if($page == 'section' || $page == 'subject' || $page == 'student' || $page == 'marksheet' || $page == 'schedule' ||$page == 'accounting') {
+        if($page == 'section' || $page == 'subject' || $page == 'student' || $page == 'marksheet' || $page == 'schedule' ||$page == 'accounting'||$page == 'home') {
             $this->load->model('model_classes');
             $data['classData'] = $this->model_classes->fetchClassData();
 
@@ -58,7 +58,7 @@ class Pages extends MY_Controller
         else{
             if($page == 'home') {
                 $this->load->view('front/head');
-                $this->load->view($page); 
+                $this->load->view($page,$data); 
                 $this->load->view('front/foot'); 
             } 
             else{
