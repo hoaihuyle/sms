@@ -8,7 +8,7 @@ class Users extends MY_Controller
 
 		// loading the users model
 		$this->load->model('model_users');
-
+		$this->load->library('session');
 		// loading the form validation library
 		$this->load->library('form_validation');		
 
@@ -42,18 +42,16 @@ class Users extends MY_Controller
 			$login = $this->model_users->login($username, $password);
 
 			if($login) {
-				$this->load->library('session');
-
 				$user_data = array(
 					'id' => $login,
 					'logged_in' => true
 				);
 
 				$this->session->set_userdata($user_data);
-
 				$validator['success'] = true;
 
 				$checkStu = $this->model_users->CheckUserStudent($user_data['id']);
+				
 				if($checkStu)
 					$validator['messages'] = "index.php/home";	
 				else

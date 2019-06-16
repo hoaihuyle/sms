@@ -10,7 +10,6 @@ class MY_Controller extends CI_Controller
 	public function isLoggedIn()
 	{
 		$this->load->library('session');
-
 		if($this->session->userdata('logged_in') === true) {
 			redirect('dashboard', 'refresh');
 		}
@@ -19,7 +18,6 @@ class MY_Controller extends CI_Controller
 	public function isNotLoggedIn()
 	{
 		$this->load->library('session');
-
 		// if($this->session->userdata('logged_in') !== true) {
 		// 	redirect('login', 'refresh');
 		// }

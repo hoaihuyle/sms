@@ -11,10 +11,7 @@ $(document).ready(function(){
 			data : form.serialize(),
 			dataType: 'json', 
 			success:function(response) {
-
 				if(response.success === true) {
-					
-					// alert(response.messages);
 					window.location = response.messages;
 
 				}

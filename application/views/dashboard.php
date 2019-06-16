@@ -8,7 +8,7 @@
 					Tổng số sinh viên : <span class="badge"><?php echo $countTotalStudent; ?></span>	
 				</a>				
 			</div>			
-		</div>
+		</div> 
 	</div>
 
 	<div class="col-md-3">
