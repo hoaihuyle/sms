@@ -1,6 +1,6 @@
 
 <?php 
-
+	
 ?>
 
 <div id="request" class="div-hide"><?php echo $this->input->get('atd'); ?></div>
@@ -20,35 +20,62 @@
 	if($this->input->get('atd') == 'add') {
 // echo "Add attendance";
 ?>
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<p>Đăng kí lịch học cá nhân</p>  	
+<div style="margin: 15px;">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<p><?php if($className) echo ('Ngành học : '.$className[0]['class_name']); else echo ('Ngành học : '); ?></p>  	
+		</div>
+	<!-- /panle-bdy -->
 	</div>
-	<div class="panel-body">
-		<div id="messages"></div>
-		<form class="form-horizontal" method="post" id="getAttendanceForm">
-			<div class="form-group">
-				<label for="type" class="col-sm-2 control-label">
-				Ngành học</label>
-				<div class="col-sm-10">
-					<select class="form-control" name="type" id="type">
-						<option value="">Lựa chọn</option>
-						<?php  
-						foreach ($classData as $key => $value) {
-						echo "<option value='".$value['class_id']."'>".$value['class_name']."</option>";
-						} // /.foreach for class data
-						?>
-					</select>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				
+				<div class="panel-heading">
+					
+					Danh sách các môn học thuộc chuyên ngành học 
 				</div>
+				<div class="list-group">			
+					<?php 
+					if($subjectData) {
+						$x = 1; 
+						foreach ($subjectData as $value) { 
+						?>
+							<a class="list-group-item classSideBar <?php if($x == 1) { echo 'active'; } ?>" onclick="getClassSection(<?php echo ($value['subject_id'].','.$userData) ?>)" id="classId<?php echo $value['subject_id'] ?>">
+					    		<?php echo $value['name'].' '; ?>(<?php echo'Thang điểm:  '.$value['total_mark']; ?>)
+						  	</a>	
+						<?php 
+						$x++;
+						}
+					} 
+					else {
+						?>
+						<a class="list-group-item">Không có dữ liệu</a>
+						<?php
+					} // /else		
+					?>
+				</div>
+
+			</div>		
+		</div>
+		<!-- /col-md-4 -->
+
+		<div class="col-md-8">
+			<div class="panel panel-default">
+			  <!-- Default panel contents -->
+			  <div class="panel-heading">Quản lý lịch môn học </div>
+			  
+			  <div class="panel-body">		  
+			  	<div id="remove-message"></div>
+
+			  	<div class="result"></div>
+			  </div>			  
 			</div>
-			<div class="result"></div>		  
-		</form>
-
-		<div id="attendance-result"></div>
+		</div>
+		<!-- /col-md-8 -->
 	</div>
-<!-- /panle-bdy -->
 </div>
-
+	<!-- /row -->
 <?php
 } // /add attendance
 else{
@@ -278,7 +305,45 @@ else{
 <?php 
 	}//report
 	?>
+<!-- Add markshet modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="addTimetableModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Đăng ký môn học</h4>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có thực sự muốn đăng ký?</p>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary" id="addTimetableBtn">Đăng ký</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
+<!-- remove markshet modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="removeTimetableModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Hủy đăng ký</h4>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có thực sự muốn hủy đăng ký?</p>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary" id="removeTimetableBtn">Hủy đăng ký</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script type="text/javascript" src="<?php echo base_url('custom/js/home.js') ?>"></script>
 
 <?php

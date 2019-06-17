@@ -148,6 +148,8 @@ class Classes extends MY_Controller
 		} // /else		
 	}
 
+	
+
 	/*
 	*------------------------------------
 	* edit class information 

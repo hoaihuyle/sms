@@ -21,6 +21,35 @@ class Model_Subject extends CI_Model
 		}
 	}
 
+	public function fetchSubjectData($subId = null)
+	{
+		if($subId){
+			$sql = "SELECT * FROM subject where subject_id = ?";
+			$query = $this->db->query($sql, array($subId));
+			return $query->row_array();
+		}
+		else{
+			$sql = "SELECT * FROM subject";
+			$query = $this->db->query($sql);
+			return $query->result_array();
+		}
+
+	}
+
+	public function fetchSubjectDataByStudent($studentId = null)
+	{
+		if($studentId){
+			$sql = "SELECT s.* FROM subject as s, student as st where s.class_id = st.class_id AND st.student_id = $studentId";
+			$query = $this->db->query($sql, array($studentId));
+			return $query->result_array();
+		}
+		else{
+			$sql = "SELECT * FROM subject";
+			$query = $this->db->query($sql);
+			return $query->result_array();
+		}
+
+	}
 	/*
 	*----------------------------------------------
 	* fetches the class's subject information

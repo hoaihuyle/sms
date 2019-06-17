@@ -69,6 +69,16 @@ class Model_Classes extends CI_Model
 		}
 	}
 
+
+
+	public function fetchClassDataByStudent($studentId = null)
+	{
+		if($studentId) {
+			$sql = "SELECT c.* FROM class as c,student as s WHERE s.student_id = ? AND c.class_id = s.class_id";
+			$query = $this->db->query($sql, array($studentId));
+			return $query->result_array();
+		}		
+	}
 	/*
 	*-----------------------------------------
 	* validate the class name

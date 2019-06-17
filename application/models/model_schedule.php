@@ -81,6 +81,15 @@ class Model_Schedule extends CI_Model
 		
 			
 	}
+
+	public function fetchScheduleData($subId = null)
+	{
+		if($subId) {
+			$sql = "SELECT sh.*, s.*, t.id FROM schedule as sh INNER JOIN subject as s ON sh.subject_id = s.subject_id LEFT JOIN timetable as t ON t.schedule_id = sh.schedule_id WHERE sh.subject_id = ? AND schedule_date > NOW()";
+			$query = $this->db->query($sql, array($subId));
+			return $query->result_array();
+		} // /if
+	}
 	
 
 }

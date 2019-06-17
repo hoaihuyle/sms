@@ -15,8 +15,20 @@ class Pages extends MY_Controller
         $data['title'] = ucfirst($page); // Capitalize the first letter
 
         if($page == 'section' || $page == 'subject' || $page == 'student' || $page == 'marksheet' || $page == 'schedule' ||$page == 'accounting'||$page == 'home') {
+
+            $this->load->model('model_users');
+            $this->load->library('session');
+            $userId = $this->session->userdata('id');
+            // //The system not save session
+            // $data['userData'] = $this->model_users->fetchUserData($userId);
+            $data['userData'] = 11;
+
             $this->load->model('model_classes');
             $data['classData'] = $this->model_classes->fetchClassData();
+            $data['className'] = $this->model_classes->fetchClassDataByStudent($data['userData']);
+
+            $this->load->model('model_subject');
+            $data['subjectData'] = $this->model_subject->fetchSubjectDataByStudent($data['userData']);
 
             $this->load->model('model_teacher');
             $data['teacherData'] = $this->model_teacher->fetchTeacherData();
